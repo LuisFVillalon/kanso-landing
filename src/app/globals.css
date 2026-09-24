@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   kanso design tokens — mirrors the kanso design system (light + dark).
+   Warm paper canvas, white hairline cards, one blue action, flat accents.
+═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --tm-bg: #f6f5f4;
+  --tm-surface: #ffffff;
+  --tm-surface-raised: #efeeeb;
+  --tm-surface-overlay: rgba(246, 245, 244, 0.92);
+
+  /* Borders */
+  --tm-border-subtle: rgba(0, 0, 0, 0.06);
+  --tm-border: rgba(0, 0, 0, 0.08);
+  --tm-wire: rgba(0, 0, 0, 0.16);
+  --tm-ruling: rgba(23, 23, 23, 0.05);
+
+  /* Text */
+  --tm-text-primary: #171717;
+  --tm-text-secondary: #615d59;
+  --tm-text-muted: #6b6b6b;
+
+  /* Accent — the single primary-action color */
+  --tm-accent: #006bcb;
+  --tm-accent-hover: #005db0;
+  --tm-accent-subtle: #e6f3fe;
+  --tm-accent-text: #ffffff;
+
+  /* Accent 2 — coral, used sparingly */
+  --tm-accent-2: #f64932;
+  --tm-accent-2-subtle: #fde7e3;
+
+  /* Status */
+  --tm-success: #167c4c;
+  --tm-success-subtle: #e3f3ea;
+
+  /* Feature colors (same in both themes) */
+  --marigold: #ffb110;
+  --saffron: #e89d01;
+  --mocha: #b18164;
+  --sky-wash: #62aef0;
+  --midnight-ink: #02093a;
+
+  /* Elevation */
+  --tm-shadow-nav: 0px 0.7px 1.462px 0px rgba(0, 0, 0, 0.015), 0px 3px 9px 0px rgba(0, 0, 0, 0.03);
+  --tm-shadow-product: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* Motion */
+  --tm-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --tm-dur-fast: 150ms;
+  --tm-dur-base: 200ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --tm-bg: #191817;
+    --tm-surface: #232120;
+    --tm-surface-raised: #2c2a28;
+    --tm-surface-overlay: rgba(25, 24, 23, 0.92);
+    --tm-border-subtle: rgba(255, 255, 255, 0.06);
+    --tm-border: rgba(255, 255, 255, 0.1);
+    --tm-wire: rgba(255, 255, 255, 0.18);
+    --tm-ruling: rgba(241, 239, 236, 0.04);
+    --tm-text-primary: #f1efec;
+    --tm-text-secondary: #b9b3ad;
+    --tm-text-muted: #9d978f;
+    --tm-accent: #62aef0;
+    --tm-accent-hover: #7dbcf3;
+    --tm-accent-subtle: #1b2a3a;
+    --tm-accent-text: #0a1628;
+    --tm-accent-2: #ff6a52;
+    --tm-accent-2-subtle: #3a211c;
+    --tm-success: #4cc28a;
+    --tm-success-subtle: #173024;
+    --tm-shadow-product: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Tailwind utilities read the tokens: bg-surface, text-secondary, border-hairline… */
+@theme inline {
+  --color-bg: var(--tm-bg);
+  --color-surface: var(--tm-surface);
+  --color-surface-raised: var(--tm-surface-raised);
+  --color-surface-overlay: var(--tm-surface-overlay);
+  --color-hairline: var(--tm-border);
+  --color-hairline-subtle: var(--tm-border-subtle);
+  --color-wire: var(--tm-wire);
+  --color-ink: var(--tm-text-primary);
+  --color-secondary: var(--tm-text-secondary);
+  --color-muted: var(--tm-text-muted);
+  --color-accent: var(--tm-accent);
+  --color-accent-hover: var(--tm-accent-hover);
+  --color-accent-subtle: var(--tm-accent-subtle);
+  --color-accent-text: var(--tm-accent-text);
+  --color-accent-2: var(--tm-accent-2);
+  --color-accent-2-subtle: var(--tm-accent-2-subtle);
+  --color-success: var(--tm-success);
+  --color-success-subtle: var(--tm-success-subtle);
+  --color-marigold: var(--marigold);
+  --color-saffron: var(--saffron);
+  --color-mocha: var(--mocha);
+  --color-sky-wash: var(--sky-wash);
+  --color-midnight-ink: var(--midnight-ink);
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), "Courier New", monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-nav: var(--tm-shadow-nav);
+  --shadow-product: var(--tm-shadow-product);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base — the notebook: warm paper with a 22px graph ruling
+═══════════════════════════════════════════════════════════════════════════ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: var(--tm-bg);
+  background-image:
+    linear-gradient(var(--tm-ruling) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tm-ruling) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--tm-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Component primitives — same classes as kanso-frontend
+═══════════════════════════════════════════════════════════════════════════ */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--tm-dur-base) var(--tm-ease), border-color var(--tm-dur-base) var(--tm-ease),
+      color var(--tm-dur-base) var(--tm-ease);
+  }
+  .btn-lg {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  /* Primary CTA — one filled action per view */
+  .btn-primary {
+    background-color: var(--tm-accent);
+    border-color: var(--tm-accent);
+    color: var(--tm-accent-text);
+  }
+  .btn-primary:hover {
+    background-color: var(--tm-accent-hover);
+    border-color: var(--tm-accent-hover);
+  }
+  /* Ghost CTA — tinted secondary action */
+  .btn-secondary {
+    background-color: var(--tm-accent-subtle);
+    color: var(--tm-accent);
+  }
+  .btn-secondary:hover {
+    border-color: var(--tm-accent);
+  }
+  /* Outline — compact tertiary action */
+  .btn-outline {
+    background-color: transparent;
+    border-color: var(--tm-border);
+    border-radius: 4px;
+    color: var(--tm-text-primary);
+  }
+  .btn-outline:hover {
+    background-color: var(--tm-surface-raised);
+  }
+
+  .card {
+    background-color: var(--tm-surface);
+    border: 1px solid var(--tm-border);
+    border-radius: 12px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1rem;
+    white-space: nowrap;
+  }
+
+  /* Signature highlight pill inside a display headline */
+  .highlight {
+    display: inline-block;
+    border-radius: 9999px;
+    background-color: var(--marigold);
+    color: #000000;
+    padding: 0.05em 0.4em 0.12em;
+  }
+
+  /* Coil strip — the notebook's wire binding */
+  .coil {
+    height: 22px;
+    background-color: var(--tm-accent-hover);
+    background-image: radial-gradient(circle 7px at center, var(--tm-surface) 7px, transparent 7.5px);
+    background-size: 30px 22px;
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
+  /* Focus: accent edge + 3px light-blue ring */
+  .btn:focus-visible,
+  a:focus-visible,
+  summary:focus-visible,
+  button:focus-visible {
+    outline: 1px solid var(--tm-accent);
+    outline-offset: 0;
+    box-shadow: 0 0 0 3px var(--tm-accent-subtle);
+  }
+}

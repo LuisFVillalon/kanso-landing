@@ -1,0 +1,28 @@
+# kanso
+
+> kanso (簡素, "simplicity") is a free-to-try web app that puts your to-do list, notes and habit tracker in one place, and gives you a daily debrief of what's overdue, what's due today and what to focus on next.
+
+## Features
+
+- Tasks: due dates and times, priorities, tags, time estimates, filtering and sorting.
+- Notes: rich-text editor with tables, highlights, resizable images and alignment; tag folders; PDF export; time tracked per note.
+- Daily debrief: overdue work, what's due today, whether today's plan fits your available hours, and a short "focus next" list. Rule-based; no AI model decides it.
+- Habits: daily check-ins, current and best streaks, and an editable 30-day history.
+- Learning resources (AI): from any note, one video, one article and one exercise. An LLM plans the searches; real search results are filtered, dead-link-checked and ranked by code, so links are never invented.
+- Big-picture calendar: year and month views plus a term tracker with a countdown.
+- Customization: 21 accent colors, six notebook page styles, a drag-and-drop dashboard, focus mode and a doodle canvas.
+
+## Try it
+
+- Demo (no signup, private sandbox deleted after a day): https://kanso-web-app.vercel.app
+- Create an account: https://kanso-web-app.vercel.app/signup
+
+## Privacy
+
+Every request is verified and scoped to the signed-in user. Accounts and their data can be deleted from Settings.
+
+## Source code
+
+- Web app (Next.js, React, TypeScript, Tailwind CSS): https://github.com/LuisFVillalon/kanso-frontend
+- API (FastAPI, SQLAlchemy, Postgres): https://github.com/LuisFVillalon/kanso-backend
+- AI service (FastAPI, OpenAI or Gemini, DuckDuckGo search): https://github.com/LuisFVillalon/kanso-ai
