@@ -19,7 +19,7 @@ export function Hero() {
         <SignupButton location="hero" />
       </div>
       <p className="mt-3.5 text-[13px] leading-5 text-muted">Opens a private sandbox with sample data in one click. Nothing you do there is shared.</p>
-      <div className="mt-14 w-full max-w-[1120px] rounded-lg bg-surface shadow-product sm:mt-16">
+      <div className="mt-14 w-full rounded-lg bg-surface shadow-product sm:mt-16">
         <Media media={HERO_MEDIA} priority />
       </div>
     </section>

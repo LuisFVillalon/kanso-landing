@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import { Analytics } from "@/components/Analytics";
 import { SITE } from "@/content/site";
 import { SITE_URL } from "@/lib/config";
+import { THEME_COLORS, THEME_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap" });
@@ -35,15 +36,17 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f5f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#191817" },
+    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.light },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.dark },
   ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
+    // suppressHydrationWarning: THEME_SCRIPT may set data-theme on <html> before React hydrates.
+    <html lang="en" className={`${inter.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body className="antialiased">
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <a href="#main" className="btn btn-primary sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50">
           Skip to content
         </a>

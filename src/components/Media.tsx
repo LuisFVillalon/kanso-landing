@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Film, ImageIcon, PlayCircle } from "lucide-react";
+import { MediaLightbox } from "@/components/MediaLightbox";
 import type { MediaSpec } from "@/content/site";
 
 type Props = {
@@ -8,45 +9,55 @@ type Props = {
   /** Hero only: loads eagerly because it is the largest paint. */
   priority?: boolean;
   compact?: boolean;
+  /** Rendered width of an image, for its srcset. Defaults to the full content column. */
+  sizes?: string;
 };
 
 /**
  * Shows the real asset once `media.src` is set in content/site.ts; until then, a
  * labelled placeholder that says exactly what to record. Videos are muted,
- * looping and inline (smaller and smoother than GIFs).
+ * looping and inline (smaller and smoother than GIFs). Real media gets an "Enlarge" overlay.
  */
-export function Media({ media, className = "", priority = false, compact = false }: Props) {
+export function Media({ media, className = "", priority = false, compact = false, sizes = "(min-width: 1280px) 1200px, 100vw" }: Props) {
   const ratio = { aspectRatio: `${media.width} / ${media.height}` };
 
-  if (media.src && media.kind === "image") {
-    return (
-      <Image
-        src={media.src}
-        alt={media.alt}
-        width={media.width}
-        height={media.height}
-        priority={priority}
-        className={`h-auto w-full rounded-lg border border-hairline ${className}`}
-      />
-    );
-  }
-
   if (media.src) {
+    const asset =
+      media.kind === "image" ? (
+        <Image
+          src={media.src}
+          alt={media.alt}
+          width={media.width}
+          height={media.height}
+          priority={priority}
+          sizes={sizes}
+          // Screenshots are mostly UI text, which the default quality (75) visibly smears.
+          quality={90}
+          className="h-auto w-full rounded-lg border border-hairline"
+        />
+      ) : (
+        <video
+          className="block h-auto w-full rounded-lg border border-hairline"
+          // "auto" lets the file's real ratio win once it loads, so a spec that's slightly off never letterboxes.
+          style={{ aspectRatio: `auto ${media.width} / ${media.height}` }}
+          src={media.src}
+          poster={media.poster}
+          width={media.width}
+          height={media.height}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload={priority ? "auto" : "none"}
+          aria-label={media.alt}
+        />
+      );
+
     return (
-      <video
-        className={`w-full rounded-lg border border-hairline ${className}`}
-        style={ratio}
-        src={media.src}
-        poster={media.poster}
-        width={media.width}
-        height={media.height}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload={priority ? "auto" : "none"}
-        aria-label={media.alt}
-      />
+      <div className={`relative rounded-lg ${className}`}>
+        {asset}
+        <MediaLightbox media={{ ...media, src: media.src }} />
+      </div>
     );
   }
 

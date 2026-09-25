@@ -1,5 +1,7 @@
 import { Check } from "lucide-react";
+import Link from "next/link";
 import { PRIVACY_POINTS } from "@/content/site";
+import { LINKS } from "@/lib/config";
 
 /** Removes the privacy objection right before pricing. */
 export function Privacy() {
@@ -11,6 +13,9 @@ export function Privacy() {
             Your notebook stays yours
           </h2>
           <p className="mt-4 text-[17px] leading-7 text-[#d9dcef]">kanso is built so nobody else can read your data, and the code is public so you can check.</p>
+          <Link href={LINKS.privacy} className="mt-5 inline-block text-sky-wash">
+            Read the privacy policy
+          </Link>
         </div>
         <ul className="grid gap-4 text-base leading-6">
           {PRIVACY_POINTS.map((p) => (

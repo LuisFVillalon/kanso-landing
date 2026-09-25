@@ -56,8 +56,10 @@
   --tm-dur-base: 200ms;
 }
 
+/* Dark tokens: follow the OS unless the header toggle (ThemeToggle.tsx) pinned a theme
+   via data-theme on <html>. The two blocks must stay identical. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     color-scheme: dark;
     --tm-bg: #191817;
     --tm-surface: #232120;
@@ -79,6 +81,42 @@
     --tm-success: #4cc28a;
     --tm-success-subtle: #173024;
     --tm-shadow-product: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --tm-bg: #191817;
+  --tm-surface: #232120;
+  --tm-surface-raised: #2c2a28;
+  --tm-surface-overlay: rgba(25, 24, 23, 0.92);
+  --tm-border-subtle: rgba(255, 255, 255, 0.06);
+  --tm-border: rgba(255, 255, 255, 0.1);
+  --tm-wire: rgba(255, 255, 255, 0.18);
+  --tm-ruling: rgba(241, 239, 236, 0.04);
+  --tm-text-primary: #f1efec;
+  --tm-text-secondary: #b9b3ad;
+  --tm-text-muted: #9d978f;
+  --tm-accent: #62aef0;
+  --tm-accent-hover: #7dbcf3;
+  --tm-accent-subtle: #1b2a3a;
+  --tm-accent-text: #0a1628;
+  --tm-accent-2: #ff6a52;
+  --tm-accent-2-subtle: #3a211c;
+  --tm-success: #4cc28a;
+  --tm-success-subtle: #173024;
+  --tm-shadow-product: 0px 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* dark: variant with the same rules as the tokens above */
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+  &:where(:root[data-theme="dark"] *) {
+    @slot;
   }
 }
 
@@ -246,4 +284,9 @@ body {
     outline-offset: 0;
     box-shadow: 0 0 0 3px var(--tm-accent-subtle);
   }
+}
+
+/* Keep the page from scrolling behind an open lightbox (components/MediaLightbox.tsx). */
+html:has(dialog[open]) {
+  overflow: hidden;
 }
