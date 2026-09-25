@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Privacy } from "@/components/sections/Privacy";
 import { ProofStrip } from "@/components/sections/ProofStrip";
+import { Roadmap } from "@/components/sections/Roadmap";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { WhatIsKanso } from "@/components/sections/WhatIsKanso";
@@ -27,6 +28,7 @@ export default function HomePage() {
         <Customize />
         <HowItWorks />
         <Privacy />
+        <Roadmap />
         <Faq />
         <FinalCta />
       </main>

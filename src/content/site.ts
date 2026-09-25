@@ -193,6 +193,22 @@ export const STEPS: { title: string; body: string }[] = [
   { title: "Keep it with an account", body: "Sign up with email or Google to keep your work. Each morning, start from the daily debrief." },
 ];
 
+/** Planned, not shipped. Keep these out of FEATURES, the FAQ and llms.txt until they exist in the app. */
+export const ROADMAP: { title: string; body: string }[] = [
+  {
+    title: "Canvas integration",
+    body: "Connect your Canvas account and pull assignments and due dates straight into your tasks and calendar.",
+  },
+  {
+    title: "Projects",
+    body: "Group related tasks, notes and habits in one workspace, like projects in ChatGPT. Each project is tied to a tag, so anything you tag lands there on its own.",
+  },
+  {
+    title: "Mood tracker",
+    body: "Log how you feel each day and see it next to your habits and streaks.",
+  },
+];
+
 export const PRIVACY_POINTS = [
   "Every request is checked and scoped to your account alone.",
   "Demo sandboxes are private and deleted after a day.",
