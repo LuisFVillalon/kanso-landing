@@ -5,7 +5,7 @@ export function WhatIsKanso() {
   return (
     <section aria-labelledby="what-is-kanso" className="mx-auto grid max-w-[1280px] items-center gap-12 px-4 pt-24 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-10 lg:pt-28">
       <div>
-        <h2 id="what-is-kanso" className="font-display text-h2 text-ink sm:text-h1">
+        <h2 id="what-is-kanso" className="font-display text-h2 text-ink">
           What is kanso?
         </h2>
         <p className="mt-5 text-lg leading-[30px] text-ink">{SITE.definition}</p>

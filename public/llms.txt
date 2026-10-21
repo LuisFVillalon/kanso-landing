@@ -1,12 +1,12 @@
 # kanso
 
-> kanso is a free-to-try web app that puts your to-do list, notes and habit tracker in one place, and gives you a daily debrief of what's overdue, what's due today and what to focus on next.
+> kanso is a free-to-try web app that puts your to-do list, notes and habit tracker in one place, and gives you a daily debrief of what slipped, what's due today and what to focus on next.
 
 ## Features
 
 - Tasks: due dates and times, priorities, tags, time estimates, filtering and sorting.
 - Notes: rich-text editor with tables, highlights, resizable images and alignment; tag folders; PDF export; time tracked per note.
-- Daily debrief: overdue work, what's due today, whether today's plan fits your available hours, and a short "focus next" list. Rule-based; no AI model decides it.
+- Daily debrief: what slipped, what's due today, whether today's plan fits your available hours, and a short "focus next" list. Rule-based; no AI model decides it.
 - Habits: daily check-ins, current and best streaks, and an editable 30-day history.
 - Learning resources (AI): from any note, one video, one article and one exercise. An LLM plans the searches; real search results are filtered, dead-link-checked and ranked by code, so links are never invented.
 - Big-picture calendar: year and month views plus a term tracker with a countdown.

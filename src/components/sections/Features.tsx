@@ -18,7 +18,7 @@ export function Features() {
           <div className="grid gap-5 lg:grid-cols-2 lg:items-end lg:gap-16">
             <div>
               <span className="chip bg-rule text-ink">{f.label}</span>
-              <h3 className="mt-4 font-display text-h2 text-ink">{f.title}</h3>
+              <h3 className="mt-4 text-h3 text-ink">{f.title}</h3>
               <p className="mt-3.5 text-[17px] leading-7 text-secondary">{f.body}</p>
             </div>
             {f.bullets && (
@@ -40,7 +40,7 @@ export function Features() {
         {SECONDARY_FEATURES.map((f) => (
           <article key={f.id} id={f.id} className="card flex flex-col gap-3.5 p-6 sm:p-8">
             <span className="chip self-start bg-rule text-ink">{f.label}</span>
-            <h3 className="font-display text-h2 text-ink">{f.title}</h3>
+            <h3 className="text-h3 text-ink">{f.title}</h3>
             <p className="text-base leading-[26px] text-secondary">{f.body}</p>
             <Media media={f.media} className="mt-2" sizes="(min-width: 1024px) 600px, 100vw" />
           </article>

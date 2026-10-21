@@ -10,7 +10,7 @@ export const SITE = {
     "kanso puts your to-do list, notes and habit streaks in one calm web app, with a daily debrief of what to focus on next. Try the demo, no signup needed.",
   // The one quotable definition (GEO). Reuse it verbatim in READMEs and listings.
   definition:
-    "kanso is a free-to-try web app that puts your to-do list, notes and habit tracker in one place, and gives you a daily debrief of what’s overdue, what’s due today and what to focus on next.",
+    "kanso is a free-to-try web app that puts your to-do list, notes and habit tracker in one place, and gives you a daily debrief of what slipped, what’s due today and what to focus on next.",
 };
 
 export type MediaSpec = {
@@ -96,8 +96,8 @@ export const FEATURES: Feature[] = [
       src: "/media/feature-debrief.png",
       width: 1775,
       height: 584,
-      alt: "kanso’s daily debrief listing overdue, due-today and focus-next tasks",
-      brief: "The debrief panel with overdue items, today’s tasks, a capacity warning and three focus-next items.",
+      alt: "kanso’s daily debrief listing slipped, due-today and focus-next tasks",
+      brief: "The debrief panel with slipped items, today’s tasks, a capacity warning and three focus-next items.",
     },
   },
   {
@@ -318,7 +318,7 @@ export const PRIVACY_POLICY: { updated: string; intro: string; sections: PolicyS
 export const FAQ: { q: string; a: string }[] = [
   {
     q: "What is kanso?",
-    a: "kanso is a web app that combines a to-do list, a notes app and a habit tracker. It also provides a daily debrief that shows what is overdue, what is due today and what to focus on next.",
+    a: "kanso is a web app that combines a to-do list, a notes app and a habit tracker. It also provides a daily debrief that shows what slipped, what is due today and what to focus on next.",
   },
   {
     q: "Is kanso free?",
@@ -330,7 +330,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does the daily debrief decide what I should do next?",
-    a: "It uses transparent rules rather than an AI model. It reviews overdue tasks, tasks due today, priorities and time estimates, weighs them against the hours you have available, and recommends a few tasks to focus on next.",
+    a: "It uses transparent rules rather than an AI model. It reviews tasks that slipped, tasks due today, priorities and time estimates, weighs them against the hours you have available, and recommends a few tasks to focus on next.",
   },
   {
     q: "Does the AI make up links?",
