@@ -1,3 +1,4 @@
+import { Logo } from "@/components/Logo";
 import { SITE } from "@/content/site";
 import { LINKS } from "@/lib/config";
 
@@ -33,13 +34,14 @@ export function SiteFooter() {
     <footer className="border-t border-hairline bg-surface">
       <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-14 text-sm leading-[22px] sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-10">
         <div className="flex flex-col gap-2.5">
-          <span className="text-lg font-bold tracking-tight text-ink">{SITE.name}</span>
-          <span className="text-secondary">{SITE.tagline}</span>
+          <Logo className="h-8 w-auto self-start" />
+          <span className="font-display text-xl text-ink italic">{SITE.tagline}</span>
+          <span className="text-secondary">{SITE.summary}</span>
           <span className="text-muted">© {new Date().getFullYear()} kanso</span>
         </div>
         {COLUMNS.map((col) => (
           <nav key={col.title} aria-label={col.title} className="flex flex-col gap-2">
-            <span className="font-semibold text-ink">{col.title}</span>
+            <span className="font-bold text-ink">{col.title}</span>
             {col.links.map((l) => (
               <a key={l.label} href={l.href} className="text-secondary no-underline hover:text-ink">
                 {l.label}

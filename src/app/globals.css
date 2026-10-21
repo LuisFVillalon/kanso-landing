@@ -1,54 +1,64 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   kanso design tokens — mirrors the kanso design system (light + dark).
-   Warm paper canvas, white hairline cards, one blue action, flat accents.
+   kanso brand tokens · v3 — brand/DESIGN.md is the source of truth, and the values
+   below mirror brand/tokens/tokens.css. Paper, ink, pencil and the ruled line; key red
+   is brand-only. --tm-accent* mirror the app's default accent (buttons and links).
 ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
   color-scheme: light;
 
-  /* Surfaces */
-  --tm-bg: #f6f5f4;
-  --tm-surface: #ffffff;
-  --tm-surface-raised: #efeeeb;
-  --tm-surface-overlay: rgba(246, 245, 244, 0.92);
+  /* Paper and ink */
+  --tm-bg: #f4efe4; /* Paper: page canvas, never pure white */
+  --tm-surface: #fbf8f1; /* Cards, panels */
+  --tm-surface-raised: #fffdf8; /* Menus, modals */
+  --tm-surface-overlay: rgba(244, 239, 228, 0.92);
+  --tm-border-subtle: rgba(25, 24, 23, 0.06);
+  --tm-border: #e3dccd; /* Hairlines between cards */
+  --tm-border-strong: #cfc6b4;
+  --tm-text-primary: #191817; /* Ink: headings, key copy, wordmark */
+  --tm-text-secondary: #4a4640; /* Body text */
+  --tm-text-muted: #6b655c; /* Helper text, meta */
+  --tm-pencil: #8a847a; /* Icons, dividers. Not for text. */
+  --tm-rule: #d6dee3; /* Notebook ruling, grid lines, calm highlights */
 
-  /* Borders */
-  --tm-border-subtle: rgba(0, 0, 0, 0.06);
-  --tm-border: rgba(0, 0, 0, 0.08);
-  --tm-wire: rgba(0, 0, 0, 0.16);
-  --tm-ruling: rgba(23, 23, 23, 0.05);
-
-  /* Text */
-  --tm-text-primary: #171717;
-  --tm-text-secondary: #615d59;
-  --tm-text-muted: #6b6b6b;
-
-  /* Accent — the single primary-action color */
+  /* Accent: buttons and links (the app's default accent) */
   --tm-accent: #006bcb;
   --tm-accent-hover: #005db0;
   --tm-accent-subtle: #e6f3fe;
   --tm-accent-text: #ffffff;
 
-  /* Accent 2 — coral, used sparingly */
-  --tm-accent-2: #f64932;
-  --tm-accent-2-subtle: #fde7e3;
+  /* Brand: the k key. Logo and marketing only; never buttons, errors or small text. */
+  --kanso-key: #c8402f;
+  --kanso-key-side: #8e2a1f;
+  --kanso-key-deep: #a33224;
 
-  /* Status */
-  --tm-success: #167c4c;
-  --tm-success-subtle: #e3f3ea;
+  /* Status: always pair with an icon and a word */
+  --tm-success: #7fb069;
+  --tm-success-subtle: #e4f0dc;
+  --tm-success-text: #2f5a22;
+  --tm-upcoming: #e6b422;
+  --tm-upcoming-subtle: #faefc8;
+  --tm-upcoming-text: #5c4300;
+  --tm-due: #e0813a;
+  --tm-due-subtle: #fbe1ce;
+  --tm-due-text: #7a3510;
+  --tm-slipped-dot: #d9a441;
+  --tm-slipped-subtle: #ece7dd;
+  --tm-slipped-text: #4a4640;
 
-  /* Feature colors (same in both themes) */
-  --marigold: #ffb110;
-  --saffron: #e89d01;
-  --mocha: #b18164;
-  --sky-wash: #62aef0;
-  --midnight-ink: #02093a;
+  /* Type */
+  --font-display-settings: "SOFT" 100, "WONK" 0;
 
-  /* Elevation */
-  --tm-shadow-nav: 0px 0.7px 1.462px 0px rgba(0, 0, 0, 0.015), 0px 3px 9px 0px rgba(0, 0, 0, 0.03);
-  --tm-shadow-product: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  /* Shape */
+  --tm-radius-small: 4px;
+  --tm-radius-buttons: 8px;
+  --tm-radius-cards: 12px;
+  --tm-radius-pills: 999px;
+
+  /* Elevation: overlays only. Cards use a hairline, not a shadow. */
+  --tm-shadow-nav: 0px 0.7px 1.462px 0px rgba(25, 24, 23, 0.015), 0px 3px 9px 0px rgba(25, 24, 23, 0.03);
 
   /* Motion */
   --tm-ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -56,56 +66,68 @@
   --tm-dur-base: 200ms;
 }
 
-/* Dark tokens: follow the OS unless the header toggle (ThemeToggle.tsx) pinned a theme
-   via data-theme on <html>. The two blocks must stay identical. */
+/* Dark tokens (the .dark block of brand/tokens/tokens.css): follow the OS unless the header
+   toggle (ThemeToggle.tsx) pinned a theme via data-theme on <html>. The two blocks must stay identical. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --tm-bg: #191817;
-    --tm-surface: #232120;
-    --tm-surface-raised: #2c2a28;
+    --tm-surface: #24221f;
+    --tm-surface-raised: #2c2a26;
     --tm-surface-overlay: rgba(25, 24, 23, 0.92);
-    --tm-border-subtle: rgba(255, 255, 255, 0.06);
-    --tm-border: rgba(255, 255, 255, 0.1);
-    --tm-wire: rgba(255, 255, 255, 0.18);
-    --tm-ruling: rgba(241, 239, 236, 0.04);
-    --tm-text-primary: #f1efec;
-    --tm-text-secondary: #b9b3ad;
-    --tm-text-muted: #9d978f;
+    --tm-border-subtle: rgba(237, 230, 214, 0.06);
+    --tm-border: rgba(237, 230, 214, 0.12);
+    --tm-border-strong: rgba(237, 230, 214, 0.22);
+    --tm-text-primary: #ede6d6;
+    --tm-text-secondary: #cfc7b8;
+    --tm-text-muted: #b5aea2;
+    --tm-pencil: #8a847a;
+    --tm-rule: rgba(214, 222, 227, 0.1);
     --tm-accent: #62aef0;
     --tm-accent-hover: #7dbcf3;
     --tm-accent-subtle: #1b2a3a;
     --tm-accent-text: #0a1628;
-    --tm-accent-2: #ff6a52;
-    --tm-accent-2-subtle: #3a211c;
-    --tm-success: #4cc28a;
-    --tm-success-subtle: #173024;
-    --tm-shadow-product: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    --kanso-key: #d4533f;
+    --kanso-key-side: #9e3426;
+    --tm-success-subtle: rgba(127, 176, 105, 0.18);
+    --tm-success-text: #b9dca8;
+    --tm-upcoming-subtle: rgba(230, 180, 34, 0.18);
+    --tm-upcoming-text: #f2d27a;
+    --tm-due-subtle: rgba(224, 129, 58, 0.2);
+    --tm-due-text: #f5b98a;
+    --tm-slipped-subtle: rgba(237, 230, 214, 0.08);
+    --tm-slipped-text: #cfc7b8;
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
   --tm-bg: #191817;
-  --tm-surface: #232120;
-  --tm-surface-raised: #2c2a28;
+  --tm-surface: #24221f;
+  --tm-surface-raised: #2c2a26;
   --tm-surface-overlay: rgba(25, 24, 23, 0.92);
-  --tm-border-subtle: rgba(255, 255, 255, 0.06);
-  --tm-border: rgba(255, 255, 255, 0.1);
-  --tm-wire: rgba(255, 255, 255, 0.18);
-  --tm-ruling: rgba(241, 239, 236, 0.04);
-  --tm-text-primary: #f1efec;
-  --tm-text-secondary: #b9b3ad;
-  --tm-text-muted: #9d978f;
+  --tm-border-subtle: rgba(237, 230, 214, 0.06);
+  --tm-border: rgba(237, 230, 214, 0.12);
+  --tm-border-strong: rgba(237, 230, 214, 0.22);
+  --tm-text-primary: #ede6d6;
+  --tm-text-secondary: #cfc7b8;
+  --tm-text-muted: #b5aea2;
+  --tm-pencil: #8a847a;
+  --tm-rule: rgba(214, 222, 227, 0.1);
   --tm-accent: #62aef0;
   --tm-accent-hover: #7dbcf3;
   --tm-accent-subtle: #1b2a3a;
   --tm-accent-text: #0a1628;
-  --tm-accent-2: #ff6a52;
-  --tm-accent-2-subtle: #3a211c;
-  --tm-success: #4cc28a;
-  --tm-success-subtle: #173024;
-  --tm-shadow-product: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  --kanso-key: #d4533f;
+  --kanso-key-side: #9e3426;
+  --tm-success-subtle: rgba(127, 176, 105, 0.18);
+  --tm-success-text: #b9dca8;
+  --tm-upcoming-subtle: rgba(230, 180, 34, 0.18);
+  --tm-upcoming-text: #f2d27a;
+  --tm-due-subtle: rgba(224, 129, 58, 0.2);
+  --tm-due-text: #f5b98a;
+  --tm-slipped-subtle: rgba(237, 230, 214, 0.08);
+  --tm-slipped-text: #cfc7b8;
 }
 
 /* dark: variant with the same rules as the tokens above */
@@ -120,45 +142,84 @@
   }
 }
 
-/* Tailwind utilities read the tokens: bg-surface, text-secondary, border-hairline… */
+/* Tailwind utilities read the tokens (brand/snippets/tailwind-theme.css plus the
+   site's older names): bg-paper, text-ink, border-hairline, font-display, text-h2… */
 @theme inline {
   --color-bg: var(--tm-bg);
+  --color-paper: var(--tm-bg);
   --color-surface: var(--tm-surface);
   --color-surface-raised: var(--tm-surface-raised);
   --color-surface-overlay: var(--tm-surface-overlay);
   --color-hairline: var(--tm-border);
   --color-hairline-subtle: var(--tm-border-subtle);
-  --color-wire: var(--tm-wire);
+  --color-line: var(--tm-border);
+  --color-wire: var(--tm-border-strong);
   --color-ink: var(--tm-text-primary);
+  --color-ink-secondary: var(--tm-text-secondary);
+  --color-ink-muted: var(--tm-text-muted);
   --color-secondary: var(--tm-text-secondary);
   --color-muted: var(--tm-text-muted);
+  --color-pencil: var(--tm-pencil);
+  --color-rule: var(--tm-rule);
+  --color-key: var(--kanso-key);
+  --color-key-side: var(--kanso-key-side);
   --color-accent: var(--tm-accent);
   --color-accent-hover: var(--tm-accent-hover);
   --color-accent-subtle: var(--tm-accent-subtle);
   --color-accent-text: var(--tm-accent-text);
-  --color-accent-2: var(--tm-accent-2);
-  --color-accent-2-subtle: var(--tm-accent-2-subtle);
-  --color-success: var(--tm-success);
-  --color-success-subtle: var(--tm-success-subtle);
-  --color-marigold: var(--marigold);
-  --color-saffron: var(--saffron);
-  --color-mocha: var(--mocha);
-  --color-sky-wash: var(--sky-wash);
-  --color-midnight-ink: var(--midnight-ink);
 
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --color-done: var(--tm-success);
+  --color-done-subtle: var(--tm-success-subtle);
+  --color-done-text: var(--tm-success-text);
+  --color-upcoming: var(--tm-upcoming);
+  --color-upcoming-subtle: var(--tm-upcoming-subtle);
+  --color-upcoming-text: var(--tm-upcoming-text);
+  --color-due: var(--tm-due);
+  --color-due-subtle: var(--tm-due-subtle);
+  --color-due-text: var(--tm-due-text);
+  --color-slipped: var(--tm-slipped-dot);
+  --color-slipped-subtle: var(--tm-slipped-subtle);
+  --color-slipped-text: var(--tm-slipped-text);
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-mplus-rounded), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), "Courier New", monospace;
+
+  /* Type scale (DESIGN.md → Typography) */
+  --text-display: 64px;
+  --text-display--line-height: 72px;
+  --text-display--font-weight: 400;
+  --text-h1: 40px;
+  --text-h1--line-height: 48px;
+  --text-h1--font-weight: 500;
+  --text-h2: 28px;
+  --text-h2--line-height: 36px;
+  --text-h2--font-weight: 500;
+  --text-h3: 18px;
+  --text-h3--line-height: 26px;
+  --text-h3--font-weight: 700;
+  --text-body: 16px;
+  --text-body--line-height: 26px;
+  --text-small: 13px;
+  --text-small--line-height: 20px;
+  --text-small--font-weight: 500;
 
   --radius-sm: 4px;
   --radius-md: 8px;
+  --radius-btn: 8px;
   --radius-lg: 12px;
+  --radius-card: 12px;
 
   --shadow-nav: var(--tm-shadow-nav);
-  --shadow-product: var(--tm-shadow-product);
+}
+
+/* Wordmark and display headings: Fraunces with soft serifs */
+.font-display {
+  font-variation-settings: var(--font-display-settings);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   Base — the notebook: warm paper with a 22px graph ruling
+   Base — the notebook: paper with a 22px graph ruling in --tm-rule
 ═══════════════════════════════════════════════════════════════════════════ */
 html {
   scroll-behavior: smooth;
@@ -168,8 +229,8 @@ html {
 body {
   background-color: var(--tm-bg);
   background-image:
-    linear-gradient(var(--tm-ruling) 1px, transparent 1px),
-    linear-gradient(90deg, var(--tm-ruling) 1px, transparent 1px);
+    linear-gradient(var(--tm-rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tm-rule) 1px, transparent 1px);
   background-size: 22px 22px;
   color: var(--tm-text-primary);
   font-family: var(--font-sans);
@@ -256,26 +317,26 @@ body {
     white-space: nowrap;
   }
 
-  /* Signature highlight pill inside a display headline */
+  /* A highlighter stroke behind one word of a display headline */
   .highlight {
-    display: inline-block;
-    border-radius: 9999px;
-    background-color: var(--marigold);
-    color: #000000;
-    padding: 0.05em 0.4em 0.12em;
+    border-radius: 4px;
+    background-color: var(--tm-upcoming-subtle);
+    color: inherit;
+    padding: 0 0.12em;
+    box-decoration-break: clone;
   }
 
   /* Coil strip — the notebook's wire binding */
   .coil {
     height: 22px;
-    background-color: var(--tm-accent-hover);
+    background-color: var(--tm-text-primary);
     background-image: radial-gradient(circle 7px at center, var(--tm-surface) 7px, transparent 7.5px);
     background-size: 30px 22px;
     background-repeat: repeat-x;
     background-position: center;
   }
 
-  /* Focus: accent edge + 3px light-blue ring */
+  /* Focus: accent edge + 3px --tm-accent-subtle ring */
   .btn:focus-visible,
   a:focus-visible,
   summary:focus-visible,

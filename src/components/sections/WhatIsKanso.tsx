@@ -5,7 +5,7 @@ export function WhatIsKanso() {
   return (
     <section aria-labelledby="what-is-kanso" className="mx-auto grid max-w-[1280px] items-center gap-12 px-4 pt-24 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-10 lg:pt-28">
       <div>
-        <h2 id="what-is-kanso" className="text-3xl leading-tight font-semibold tracking-tight text-ink sm:text-[40px] sm:leading-[48px]">
+        <h2 id="what-is-kanso" className="font-display text-h2 text-ink">
           What is kanso?
         </h2>
         <p className="mt-5 text-lg leading-[30px] text-ink">{SITE.definition}</p>
@@ -19,9 +19,9 @@ export function WhatIsKanso() {
           <caption className="sr-only">kanso compared with using separate apps</caption>
           <thead>
             <tr className="border-b border-hairline">
-              <th scope="col" className="p-4 font-semibold text-muted">You need</th>
-              <th scope="col" className="p-4 font-semibold text-muted">Usually</th>
-              <th scope="col" className="rounded-t-lg bg-accent-subtle p-4 font-semibold text-accent">With kanso</th>
+              <th scope="col" className="p-4 font-bold text-muted">You need</th>
+              <th scope="col" className="p-4 font-bold text-muted">Usually</th>
+              <th scope="col" className="rounded-t-lg bg-accent-subtle p-4 font-bold text-accent">With kanso</th>
             </tr>
           </thead>
           <tbody>
@@ -31,7 +31,7 @@ export function WhatIsKanso() {
                 <tr key={row.need} className={last ? "" : "border-b border-hairline-subtle"}>
                   <th scope="row" className="p-4 font-normal text-ink">{row.need}</th>
                   <td className="p-4 text-secondary">{row.usually}</td>
-                  <td className={`bg-accent-subtle p-4 text-ink ${last ? "rounded-b-lg font-semibold" : ""}`}>{row.kanso}</td>
+                  <td className={`bg-accent-subtle p-4 text-ink ${last ? "rounded-b-lg font-bold" : ""}`}>{row.kanso}</td>
                 </tr>
               );
             })}

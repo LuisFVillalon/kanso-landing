@@ -10,7 +10,7 @@ export function Customize() {
         {CUSTOMIZATIONS.map((c) => (
           <div key={c.title} className="card flex flex-col gap-2.5 p-6">
             <Media media={c.media} compact sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" />
-            <h3 className="mt-1.5 text-[17px] leading-6 font-semibold text-ink">{c.title}</h3>
+            <h3 className="mt-1.5 text-h3 text-ink">{c.title}</h3>
             <p className="text-sm leading-[22px] text-secondary">{c.body}</p>
           </div>
         ))}

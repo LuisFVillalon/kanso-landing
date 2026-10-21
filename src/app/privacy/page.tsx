@@ -17,7 +17,7 @@ export default function PrivacyPage() {
       <Link href="/" className="text-sm text-accent">
         ← Back to kanso
       </Link>
-      <h1 className="mt-6 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Privacy</h1>
+      <h1 className="mt-6 font-display text-h1 text-ink">Privacy</h1>
       <p className="mt-2 text-sm text-muted">Last updated {updated}</p>
       <p className="mt-6 text-[17px] leading-7 text-secondary">{intro}</p>
 
@@ -35,7 +35,7 @@ export default function PrivacyPage() {
 
       {sections.map((s) => (
         <section key={s.id} id={s.id} aria-labelledby={`${s.id}-heading`} className="mt-12 scroll-mt-8">
-          <h2 id={`${s.id}-heading`} className="text-xl leading-7 font-semibold text-ink">
+          <h2 id={`${s.id}-heading`} className="font-display text-h2 text-ink">
             {s.heading}
           </h2>
           {s.items && (
