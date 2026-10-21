@@ -1,13 +1,15 @@
 # kanso-landing
 
-The marketing site for **kanso** (簡素, "simplicity"): tasks, notes and habits in one calm place.
+![kanso](brand/logo/kanso-lockup-horizontal.svg)
+
+The marketing site for **kanso**: tasks, notes and habits on one calm page. Keep it kanso.
 
 It's built to rank in search, get quoted by AI answer engines, and move visitors from the hero to the demo to an account.
 
 | | |
 |---|---|
 | Stack | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 |
-| Design | The kanso design system: warm paper, white hairline cards, one blue action, light and dark themes |
+| Design | The kanso brand identity in [`brand/`](brand/DESIGN.md): paper and ink, the k key, Fraunces and M PLUS Rounded 1c, light and dark themes. `brand/DESIGN.md` is the source of truth. |
 | Related | [kanso-frontend](https://github.com/LuisFVillalon/kanso-frontend) (the app) · [kanso-backend](https://github.com/LuisFVillalon/kanso-backend) · [kanso-ai](https://github.com/LuisFVillalon/kanso-ai) |
 
 ## Getting started
@@ -20,7 +22,7 @@ npm run dev                  # http://localhost:3000
 
 Other scripts: `npm run build`, `npm run start`, `npm run lint`, `npm run typecheck`.
 
-The build downloads Inter and Geist Mono from Google Fonts through `next/font`, so it needs internet access (Vercel has it).
+The build downloads Fraunces, M PLUS Rounded 1c and Geist Mono from Google Fonts through `next/font`, so it needs internet access (Vercel has it).
 
 ### Environment
 
@@ -35,22 +37,27 @@ The build downloads Inter and Geist Mono from Google Fonts through `next/font`, 
 ```
 src/
   app/
-    layout.tsx            metadata, fonts, skip link, analytics listener
+    layout.tsx            metadata, skip link, analytics listener
+    fonts.ts              Fraunces, M PLUS Rounded 1c and Geist Mono via next/font
     page.tsx              the home page: sections in funnel order + JSON-LD
-    globals.css           kanso tokens (light + dark), Tailwind theme, .btn/.card/.chip/.highlight/.coil
-    opengraph-image.tsx   generated 1200×630 social card
+    globals.css           brand tokens (light + dark), Tailwind theme and type scale, .btn/.card/.chip/.highlight/.coil
+    favicon.ico, icon.svg, apple-icon.png, manifest.webmanifest   icons from brand/icons
+    opengraph-image.png, twitter-image.png                         1200×630 social card (brand/icons/og-image.png)
     robots.ts, sitemap.ts
     privacy/page.tsx      placeholder policy page (noindex until written)
   components/
     sections/             one file per page section
     Media.tsx             real video/image once `src` is set, labelled placeholder until then
     Cta.tsx               DemoButton (primary) and SignupButton (secondary)
+    Logo.tsx              the horizontal lockup, inline, themed for light and dark
     Analytics.tsx         delegated click, FAQ-open and scroll-depth events
   content/site.ts         ALL copy: features, FAQ, steps, pricing, media briefs
   lib/
     config.ts             URLs from the environment
     jsonld.ts             SoftwareApplication, FAQPage, HowTo and WebSite schema
+brand/                    the brand kit: DESIGN.md, tokens, logo, icons, snippets
 public/
+  icon-*.png              manifest icons
   llms.txt                plain-language summary for AI crawlers
   media/                  put recorded videos and screenshots here
 ```
@@ -78,7 +85,7 @@ Record loops as muted **WebM or MP4**, not GIF: they're usually 5–10× smaller
 
 ## SEO, GEO and AEO: what's built in
 
-- **Metadata:** title, description, canonical, Open Graph and X cards, theme colors for light and dark, and a generated social image.
+- **Metadata:** title, description, canonical, Open Graph and X cards, theme colors for light and dark, and the brand social image.
 - **Structured data:** SoftwareApplication, FAQPage (built from the same `FAQ` array the page renders, so they can't drift apart), HowTo and WebSite/Organization with the GitHub repos as `sameAs`.
 - **Answer-first copy:**
   - A "What is kanso?" H2 followed by one quotable definition (`SITE.definition`). Reuse that sentence verbatim in READMEs and listings.
@@ -89,7 +96,7 @@ Record loops as muted **WebM or MP4**, not GIF: they're usually 5–10× smaller
 - **Speed and accessibility:**
   - The page is fully static and server-rendered.
   - Fonts are self-hosted by `next/font`, and media below the fold isn't preloaded.
-  - There's a skip link, one H1 with H2/H3 in order, focus styles (accent edge plus a 3px light-blue ring) and WCAG AA colors in both themes.
+  - There's a skip link, one H1 with H2/H3 in order, focus styles (accent edge plus a 3px accent-subtle ring) and WCAG AA colors in both themes.
 
 ## Funnel and analytics
 

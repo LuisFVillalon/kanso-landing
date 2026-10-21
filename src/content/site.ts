@@ -3,8 +3,8 @@
 
 export const SITE = {
   name: "kanso",
-  nameJa: "簡素",
-  tagline: "Tasks, notes and habits in one calm place.",
+  tagline: "Keep it kanso.",
+  summary: "Tasks, notes and habits on one calm page.",
   title: "kanso — Tasks, Notes & Habit Tracker in One Calm App",
   description:
     "kanso puts your to-do list, notes and habit streaks in one calm web app, with a daily debrief of what to focus on next. Try the demo, no signup needed.",
@@ -42,7 +42,6 @@ export const HERO_MEDIA: MediaSpec = {
 export type Feature = {
   id: string;
   label: string;
-  chipClass: string;
   title: string;
   body: string;
   bullets?: string[];
@@ -53,7 +52,6 @@ export const FEATURES: Feature[] = [
   {
     id: "tasks",
     label: "Tasks",
-    chipClass: "bg-accent-subtle text-accent",
     title: "A to-do list that knows what matters",
     body: "Add due dates and times, priorities, tags and time estimates, then filter and sort the list your way.",
     bullets: [
@@ -74,7 +72,6 @@ export const FEATURES: Feature[] = [
   {
     id: "notes",
     label: "Notes",
-    chipClass: "bg-accent-2-subtle text-ink",
     title: "Notes that stay organized on their own",
     body: "A rich-text editor with tables, highlights, resizable images and text alignment. Notes file themselves into tag folders, export to PDF, and track how long you’ve spent on each.",
     media: {
@@ -91,9 +88,8 @@ export const FEATURES: Feature[] = [
   {
     id: "debrief",
     label: "Daily debrief",
-    chipClass: "bg-marigold text-black",
     title: "Know what to focus on next, every morning",
-    body: "See what’s overdue, what’s due today, whether today’s plan fits the hours you have, and a short “focus next” list. It runs on clear rules, not a chatbot, so it’s fast and predictable.",
+    body: "See what slipped, what’s due today, whether today’s plan fits the hours you have, and a short “focus next” list. It runs on clear rules, not a chatbot, so it’s fast and predictable.",
     media: {
       kind: "image",
       file: "feature-debrief.png",
@@ -107,7 +103,6 @@ export const FEATURES: Feature[] = [
   {
     id: "habits",
     label: "Habits",
-    chipClass: "bg-success-subtle text-success",
     title: "Build streaks you can actually see",
     body: "Daily check-ins, your current and best streak, and a 30-day history you can edit when life got in the way.",
     media: {
@@ -126,7 +121,6 @@ export const SECONDARY_FEATURES: Feature[] = [
   {
     id: "learning",
     label: "Learning resources · AI",
-    chipClass: "bg-midnight-ink text-white",
     title: "Go deeper on any note",
     body: "From any note, get one video, one article and one exercise. An AI plans the search; real results are filtered, link-checked and ranked by code, so it never invents a link.",
     media: {
@@ -142,7 +136,6 @@ export const SECONDARY_FEATURES: Feature[] = [
   {
     id: "calendar",
     label: "Calendar",
-    chipClass: "bg-sky-wash text-[#171717]",
     title: "See where your day actually went",
     body: "Open any day to compare the plan with what you actually did, broken down by tag, with a week of each beside it. Spot which parts of your life take the most time, and adjust from there.",
     media: {
@@ -325,7 +318,7 @@ export const PRIVACY_POLICY: { updated: string; intro: string; sections: PolicyS
 export const FAQ: { q: string; a: string }[] = [
   {
     q: "What is kanso?",
-    a: "kanso is a web app that combines a to-do list, a notes app and a habit tracker. It also provides a daily debrief that shows what is overdue, what is due today and what to focus on next. The name is Japanese for “simplicity.”",
+    a: "kanso is a web app that combines a to-do list, a notes app and a habit tracker. It also provides a daily debrief that shows what is overdue, what is due today and what to focus on next.",
   },
   {
     q: "Is kanso free?",

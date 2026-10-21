@@ -11,11 +11,11 @@ export function HowItWorks() {
           <li key={s.title} className="card flex flex-col gap-3 p-7">
             <span
               aria-hidden
-              className={`flex h-10 w-10 items-center justify-center rounded-full font-semibold ${i === 0 ? "bg-accent text-accent-text" : "bg-accent-subtle text-accent"}`}
+              className={`flex h-10 w-10 items-center justify-center rounded-full font-bold ${i === 0 ? "bg-accent text-accent-text" : "bg-accent-subtle text-accent"}`}
             >
               {i + 1}
             </span>
-            <h3 className="text-xl leading-7 font-semibold text-ink">
+            <h3 className="text-h3 text-ink">
               <span className="sr-only">Step {i + 1}: </span>
               {s.title}
             </h3>

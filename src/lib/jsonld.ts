@@ -10,7 +10,6 @@ export function buildJsonLd() {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       name: SITE.name,
-      alternateName: SITE.nameJa,
       applicationCategory: "ProductivityApplication",
       operatingSystem: "Web",
       url: SITE_URL,
@@ -42,7 +41,7 @@ export function buildJsonLd() {
       publisher: {
         "@type": "Organization",
         name: SITE.name,
-        logo: `${SITE_URL}/icon.svg`,
+        logo: `${SITE_URL}/icon-512.png`,
         sameAs: Object.values(LINKS.github),
       },
     },

@@ -5,7 +5,7 @@ export function ProofStrip() {
   return (
     <section aria-label="How kanso is built" className="border-y border-hairline bg-surface">
       <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-center gap-x-10 gap-y-3 px-4 py-7 text-sm text-secondary sm:px-6 lg:px-10">
-        <span className="font-semibold text-ink">Open source, built in the open</span>
+        <span className="font-bold text-ink">Open source, built in the open</span>
         {FACTS.map((f) => (
           <span key={f}>{f}</span>
         ))}

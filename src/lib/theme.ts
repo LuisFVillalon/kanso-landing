@@ -2,7 +2,7 @@
 export const THEME_KEY = "kanso_theme";
 
 /** Browser chrome color per theme; matches --tm-bg in globals.css. */
-export const THEME_COLORS = { light: "#f6f5f4", dark: "#191817" } as const;
+export const THEME_COLORS = { light: "#f4efe4", dark: "#191817" } as const;
 
 /**
  * Anti-flash script: applies the saved theme to <html> before first paint.

@@ -20,7 +20,7 @@ export function Roadmap() {
                 </span>
                 <span className="rounded-full border border-hairline px-2.5 py-0.5 text-xs font-medium text-secondary">Planned</span>
               </div>
-              <h3 className="text-xl leading-7 font-semibold text-ink">{item.title}</h3>
+              <h3 className="text-h3 text-ink">{item.title}</h3>
               <p className="text-[15px] leading-6 text-secondary">{item.body}</p>
             </li>
           );

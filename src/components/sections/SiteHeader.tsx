@@ -11,10 +11,10 @@ const NAV = [
 /** Sticky header: sign-in and the signup CTA never leave the screen. */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-hairline bg-surface-overlay shadow-nav backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-hairline bg-surface-overlay backdrop-blur">
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
-        <a href="#top" aria-label="kanso, back to top" className="no-underline">
-          <Logo />
+        <a href="#top" aria-label="kanso, back to top" className="rounded-md no-underline">
+          <Logo className="h-9 w-auto" />
         </a>
         <nav aria-label="Primary" className="hidden items-center gap-8 text-sm font-medium md:flex">
           {NAV.map((item) => (
