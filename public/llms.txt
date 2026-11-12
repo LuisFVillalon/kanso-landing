@@ -1,25 +1,37 @@
 # kanso
 
-> kanso is a free-to-try web app that puts your to-do list, notes and habit tracker in one place, and gives you a daily debrief of what slipped, what's due today and what to focus on next.
+> kanso is a free, open-source web planner for students that puts tasks, a week calendar, notes, habits and mood check-ins in one place. It suggests free times to work on each task before it's due and gives you a daily brief of what to do next, using clear rules rather than a chatbot.
+
+Made first for college students in demanding majors who procrastinate from overwhelm, not laziness. Tagline: Keep it kanso.
 
 ## Features
 
-- Tasks: due dates and times, priorities, tags, time estimates, filtering and sorting.
-- Notes: rich-text editor with tables, highlights, resizable images and alignment; tag folders; PDF export; time tracked per note.
-- Daily debrief: what slipped, what's due today, whether today's plan fits your available hours, and a short "focus next" list. Rule-based; no AI model decides it.
-- Habits: daily check-ins, current and best streaks, and an editable 30-day history.
-- Learning resources (AI): from any note, one video, one article and one exercise. An LLM plans the searches; real search results are filtered, dead-link-checked and ranked by code, so links are never invented.
-- Big-picture calendar: year and month views plus a term tracker with a countdown.
-- Customization: 21 accent colors, six notebook page styles, a drag-and-drop dashboard, focus mode and a doodle canvas.
+- Suggested work times: add a task with a due date and how long it takes, and kanso suggests up to three free times before it's due, around your classes, shifts, events and other planned work. A Which day strip shows each day's free time; Earlier and Later move a picked time and say what's in the way. Picking a time puts a work block on the calendar. Rule-based; no AI decides it.
+- Daily brief: what slipped, what's due today, whether today's plan fits your hours, a short Focus next list, today's schedule, and Habits left today with a suggested free time for each (Plan my habits plans them all). Gentle about slips: no red for missed work.
+- Calendar: a week view with work blocks you can drag and resize (15-minute snap, clashes flagged with a suggested move), habits, note time and events; a month view and the year at a glance; repeating events; term dates.
+- Focus timer: 25, 50 or 90 minutes, or a custom length, on a task; a session of five minutes or more is saved as a work block.
+- Free time: how much of today's work window is still open after events, work blocks and habits, with tasks that fit.
+- Focus mode: kanso mode (Ctrl + Zen) hides the dashboard and leaves your lists; notes have their own focus mode.
+- Notes: rich-text editor with tables, highlights, checklists, a slash menu and images; tag folders; PDF export; time tracked per note.
+- Learning resources (AI): from any note, one video, one article and one exercise. An LLM plans the searches; real search results are filtered, link-checked and ranked by code, so links are never invented. This is the only AI feature.
+- Habits: daily check-ins, current and best streaks, an editable 30-day history, and all-day habits.
+- Mood check-ins: a daily check-in (five faces, energy, stress, moments such as Slept well or Exercised, and a note), plus optional weekly and monthly check-ins. Mood data stays out of the Daily brief and every AI feature.
+- Reports: any week, month or year. Productivity (Overview with a Pace card compared with the last period, Tasks, Notes, Habits, Events), Mood (Over time, and Patterns in plain sentences), and Time by tag.
+- Google Calendar: a one-way import. Imported events can be tagged, edited, dragged and archived in kanso; nothing is written to Google.
+- Canvas: connect with a private calendar feed link or a personal access token; assignments added as tasks follow Canvas due dates and complete when Canvas counts the work done.
+- Linked tasks: break a project into steps that lead up to it, and plan them in order with Plan all.
+- Notifications: task, event and mood check-in reminders, with quiet hours.
+- Archive and Recently deleted (kept for 30 days).
+- Make it yours: 21 accent colors, six paper styles, light and dark themes, and a dashboard of widgets you arrange.
 
 ## Try it
 
-- Demo (no signup, private sandbox deleted after a day): https://kanso-web-app.vercel.app
-- Create an account: https://kanso-web-app.vercel.app/signup
+- Demo (no signup, private sandbox with sample data, deleted after about a day; Canvas and Google Calendar aren't available in it): https://kanso-web-app.vercel.app
+- Create an account (free): https://kanso-web-app.vercel.app/signup
 
 ## Privacy
 
-Every request is verified and scoped to the signed-in user. Accounts and their data can be deleted from Settings.
+Every request is verified and scoped to the signed-in user. No ads, no tracking cookies, and data is never sold. Accounts and all their data can be deleted from Settings.
 
 ## Source code
 

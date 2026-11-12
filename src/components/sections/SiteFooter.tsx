@@ -1,4 +1,5 @@
 import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { SITE } from "@/content/site";
 import { LINKS } from "@/lib/config";
 
@@ -6,8 +7,9 @@ const COLUMNS = [
   {
     title: "Product",
     links: [
+      { href: LINKS.demo, label: "Try the demo" },
+      { href: "#day", label: "A day with kanso" },
       { href: "#features", label: "Features" },
-      { href: LINKS.demo, label: "Demo" },
       { href: "#faq", label: "FAQ" },
     ],
   },
@@ -32,12 +34,12 @@ const COLUMNS = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-hairline bg-surface">
-      <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-14 text-sm leading-[22px] sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-10">
-        <div className="flex flex-col gap-2.5">
-          <Logo className="h-8 w-auto self-start" />
+      <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-8 px-4 pt-12 pb-10 text-sm leading-[22px] sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="col-span-2 flex flex-col items-start gap-2 lg:col-span-1">
+          <Logo className="h-8 w-auto" />
           <span className="font-display text-xl text-ink italic">{SITE.tagline}</span>
-          <span className="text-secondary">{SITE.summary}</span>
           <span className="text-muted">© {new Date().getFullYear()} kanso</span>
+          <ThemeToggle />
         </div>
         {COLUMNS.map((col) => (
           <nav key={col.title} aria-label={col.title} className="flex flex-col gap-2">

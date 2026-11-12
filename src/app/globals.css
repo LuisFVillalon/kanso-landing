@@ -183,7 +183,7 @@
 
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-mplus-rounded), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), "Courier New", monospace;
+  --font-mono: ui-monospace, "Courier New", monospace;
 
   /* Type scale (DESIGN.md → Typography) */
   --text-display: 64px;
@@ -219,7 +219,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   Base — the notebook: paper with a 22px graph ruling in --tm-rule
+   Base — plain paper; the notebook ruling appears only where it means something
 ═══════════════════════════════════════════════════════════════════════════ */
 html {
   scroll-behavior: smooth;
@@ -228,10 +228,6 @@ html {
 
 body {
   background-color: var(--tm-bg);
-  background-image:
-    linear-gradient(var(--tm-rule) 1px, transparent 1px),
-    linear-gradient(90deg, var(--tm-rule) 1px, transparent 1px);
-  background-size: 22px 22px;
   color: var(--tm-text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -270,23 +266,26 @@ body {
     font-size: 1rem;
     line-height: 1.5rem;
   }
-  /* Primary CTA — one filled action per view */
+  /* Primary CTA: ink on paper (paper on ink in dark). Key red is brand-only, never a button. */
   .btn-primary {
-    background-color: var(--tm-accent);
-    border-color: var(--tm-accent);
-    color: var(--tm-accent-text);
+    background-color: var(--tm-text-primary);
+    border-color: var(--tm-text-primary);
+    color: var(--tm-bg);
+    font-weight: 700;
   }
   .btn-primary:hover {
-    background-color: var(--tm-accent-hover);
-    border-color: var(--tm-accent-hover);
+    background-color: color-mix(in srgb, var(--tm-text-primary) 86%, var(--tm-bg));
   }
-  /* Ghost CTA — tinted secondary action */
+  /* Ghost CTA: the secondary action */
   .btn-secondary {
-    background-color: var(--tm-accent-subtle);
-    color: var(--tm-accent);
+    background-color: transparent;
+    border-color: var(--tm-border-strong);
+    color: var(--tm-text-primary);
+    font-weight: 700;
   }
   .btn-secondary:hover {
-    border-color: var(--tm-accent);
+    background-color: var(--tm-surface);
+    border-color: var(--tm-text-muted);
   }
   /* Outline — compact tertiary action */
   .btn-outline {
@@ -336,6 +335,30 @@ body {
     background-position: center;
   }
 
+  /* A keyboard key, for Ctrl + Zen and shortcuts */
+  .keycap {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.5rem;
+    height: 2.25rem;
+    padding: 0 0.625rem;
+    border: 1px solid var(--tm-border-strong);
+    border-bottom-width: 3px;
+    border-radius: 8px;
+    background-color: var(--tm-surface-raised);
+    color: var(--tm-text-primary);
+    font: 700 0.875rem/1 var(--font-sans);
+  }
+
+  /* Browser window around a desktop still or clip */
+  .frame {
+    overflow: hidden;
+    border: 1px solid var(--tm-border-strong);
+    border-radius: 14px;
+    background-color: var(--tm-surface);
+    box-shadow: 0 1px 0 var(--tm-border), 0 24px 60px -30px rgba(25, 24, 23, 0.35);
+  }
+
   /* Focus: accent edge + 3px --tm-accent-subtle ring */
   .btn:focus-visible,
   a:focus-visible,
@@ -344,6 +367,38 @@ body {
     outline: 1px solid var(--tm-accent);
     outline-offset: 0;
     box-shadow: 0 0 0 3px var(--tm-accent-subtle);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   The key press (DESIGN.md → The key press): 8% down (16 of 200 units) in 120 ms ease-in,
+   back in 180 ms ease-out, once, 600 ms after load. Reduced motion: the pressed frame for 300 ms.
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes key-press {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: ease-in;
+  }
+  40% {
+    transform: translateY(16px);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes key-hold {
+  from,
+  to {
+    transform: translateY(16px);
+  }
+}
+.key-top {
+  animation: key-press 300ms 600ms 1 both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .key-top {
+    animation: key-hold 300ms 600ms 1 steps(1, end);
   }
 }
 

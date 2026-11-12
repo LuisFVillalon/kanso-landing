@@ -1,18 +1,17 @@
-import { Customize } from "@/components/sections/Customize";
+import { DayTimeline } from "@/components/sections/DayTimeline";
+import { Everything } from "@/components/sections/Everything";
 import { Faq } from "@/components/sections/Faq";
-import { Features } from "@/components/sections/Features";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Hero } from "@/components/sections/Hero";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Privacy } from "@/components/sections/Privacy";
-import { ProofStrip } from "@/components/sections/ProofStrip";
-import { Roadmap } from "@/components/sections/Roadmap";
+import { InsteadOfApps } from "@/components/sections/InsteadOfApps";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
-import { WhatIsKanso } from "@/components/sections/WhatIsKanso";
+import { Trust } from "@/components/sections/Trust";
+import { WhoItsFor } from "@/components/sections/WhoItsFor";
 import { buildJsonLd } from "@/lib/jsonld";
 
-// Funnel order: awareness → interest → desire → confidence → action.
+// Direction A, "A day with kanso": hero → the day → who it's for → instead of four apps →
+// everything else → trust → FAQ → final CTA.
 export default function HomePage() {
   const jsonLd = JSON.stringify(buildJsonLd()).replace(/</g, "\\u003c");
 
@@ -22,13 +21,11 @@ export default function HomePage() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <ProofStrip />
-        <WhatIsKanso />
-        <Features />
-        <Customize />
-        <HowItWorks />
-        <Privacy />
-        <Roadmap />
+        <DayTimeline />
+        <WhoItsFor />
+        <InsteadOfApps />
+        <Everything />
+        <Trust />
         <Faq />
         <FinalCta />
       </main>
