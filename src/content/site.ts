@@ -1,212 +1,243 @@
 // All page copy lives here, so the visible FAQ and the FAQPage JSON-LD can never drift apart.
-// Anything in [BRACKETS] is a fact to confirm before launch — search the repo for "[CONFIRM".
+// Every claim is checked against kanso-frontend as it ships today: no testimonials, user
+// counts, pricing tiers or roadmap promises.
 
 export const SITE = {
   name: "kanso",
   tagline: "Keep it kanso.",
-  summary: "Tasks, notes and habits on one calm page.",
-  title: "kanso — Tasks, Notes & Habit Tracker in One Calm App",
+  secondaryTagline: "Ctrl + Zen",
+  summary: "A calm planner for students: tasks, calendar, notes, habits and mood in one place.",
+  title: "kanso — A Calm Student Planner That Finds Time for Your Work",
   description:
-    "kanso puts your to-do list, notes and habit streaks in one calm web app, with a daily debrief of what to focus on next. Try the demo, no signup needed.",
+    "kanso is a free, calm planner for students. It suggests free times to work on each task around your classes and shifts, and keeps your calendar, notes, habits and mood in one place. Try the demo, no signup.",
   // The one quotable definition (GEO). Reuse it verbatim in READMEs and listings.
   definition:
-    "kanso is a free-to-try web app that puts your to-do list, notes and habit tracker in one place, and gives you a daily debrief of what slipped, what’s due today and what to focus on next.",
+    "kanso is a free, open-source web planner for students that puts tasks, a week calendar, notes, habits and mood check-ins in one place. It suggests free times to work on each task before it's due and gives you a daily brief of what to do next, using clear rules rather than a chatbot.",
 };
 
+/** What kanso does, in short names: the JSON-LD featureList and public/llms.txt. */
+export const FEATURE_LIST = [
+  "Suggested work times before each due date",
+  "Daily brief",
+  "Week calendar with work blocks",
+  "Focus timer",
+  "Free time today",
+  "Rich-text notes with PDF export",
+  "Learning resources",
+  "Habit tracker with streaks",
+  "Mood check-ins",
+  "Reports with pace and mood patterns",
+  "Google Calendar import",
+  "Canvas assignments as tasks",
+  "Linked tasks",
+  "Notifications with quiet hours",
+  "Archive and Recently deleted",
+];
+
+/** A light and a dark version of the same asset, both under /public. */
+export type Themed = { light: string; dark: string };
+
+/**
+ * One media slot on the page. Every slot launches as a still (`kind: "image"`); swapping
+ * in a recorded clip means adding the files and changing `kind` and `src` (plus `mp4`
+ * and `poster`), with no layout change. scripts/record/ makes both, from the real app
+ * with the fictional demo student Maya.
+ */
 export type MediaSpec = {
-  kind: "video" | "gif" | "image";
-  /** File name the asset should be saved as under /public/media. */
-  file: string;
-  /** Leave undefined until the asset exists; the placeholder shows meanwhile. */
-  src?: string;
-  poster?: string;
+  /** The storyboard slot, also the scenario name in scripts/record/rec.mjs. */
+  id: "A1" | "A2" | "A3" | "A4" | "A5" | "A6" | "A7";
+  kind: "image" | "video";
+  /** The still (WebP), or for a clip the VP9 WebM. */
+  src: Themed;
+  /** Clips only: H.264 fallback for browsers without VP9. */
+  mp4?: Themed;
+  /** Clips only: the matching still, also shown with reduced motion. */
+  poster?: Themed;
   width: number;
   height: number;
+  /** Hero only: the phone-width still shown in a phone frame below 640px. */
+  phone?: { src: Themed; width: number; height: number };
   alt: string;
-  /** What to record — shown in the placeholder until `src` is set. */
-  brief: string;
+  /** What the clip that replaces the still should show (≤ 15 s, muted loop). */
+  clip: string;
 };
+
+const still = (slot: string): Themed => ({ light: `/media/${slot}-light.webp`, dark: `/media/${slot}-dark.webp` });
 
 export const HERO_MEDIA: MediaSpec = {
-  kind: "video",
-  file: "hero.mp4",
-  src: "/media/hero.mp4",
-  poster: undefined, // e.g. "/media/hero-poster.webp"
-  width: 2520,
-  height: 1080,
-  alt: "Tour of kanso: the dashboard, adding a task, a note, a habit check-in and the daily debrief",
-  brief:
-    "20–30 s silent, looping product tour: dashboard → add a task → open a note → check off a habit → read the daily debrief. Autoplay, muted, with a poster frame.",
+  id: "A1",
+  kind: "image",
+  src: still("a1"),
+  width: 1600,
+  height: 1000,
+  phone: { src: still("a1-phone"), width: 780, height: 1688 },
+  alt: "Adding the task “Write speech outline” in kanso: When to work on it suggests three free times before it's due and explains what's in the way of each.",
+  clip: "Suggested work times: press T, title, due date, 1 hour, pick a time, Which day → Monday, Create & plan, then the Work on block on the week view.",
 };
 
-export type Feature = {
+export type DayStep = {
   id: string;
+  time: string;
   label: string;
   title: string;
   body: string;
-  bullets?: string[];
+  bullets: string[];
   media: MediaSpec;
 };
 
-export const FEATURES: Feature[] = [
+export const DAY: DayStep[] = [
   {
-    id: "tasks",
-    label: "Tasks",
-    title: "A to-do list that knows what matters",
-    body: "Add due dates and times, priorities, tags and time estimates, then filter and sort the list your way.",
-    bullets: [
-      "Numbered priorities you change right from the badge",
-      "Time estimates add up against the hours you have",
-      "Colored tags shared with your notes",
-    ],
+    id: "brief",
+    time: "8:00 AM",
+    label: "Morning",
+    title: "Start with the Daily brief",
+    body: "What slipped, what's due today, whether your plan fits the hours you have, and a short Focus next list. Worked out by rules, not a chatbot.",
+    bullets: ["Today's schedule with your classes and events", "Habits left today, each with a free time", "Gentle about slips: no red, no guilt"],
     media: {
-      kind: "video",
-      file: "feature-tasks.mp4",
-      src: "/media/feature-tasks.mp4",
-      width: 1900,
-      height: 900,
-      alt: "Adding a task with a due date, tag and priority in kanso",
-      brief: "Adding a task with a due date and tag, then changing its priority from the badge menu.",
+      id: "A2",
+      kind: "image",
+      src: still("a2"),
+      width: 1600,
+      height: 1000,
+      alt: "kanso's home page with the Daily brief: tasks due today, Focus next, Habits left today and today's schedule.",
+      clip: "Home loads; Today's schedule with the now line; Focus next; Plan my habits puts Read 20 pages at a free time; Undo toast.",
+    },
+  },
+  {
+    id: "plan",
+    time: "9:00 AM",
+    label: "Plan",
+    title: "Pick a time, not just a deadline",
+    body: "Add a task with how long it takes, and kanso suggests up to three free times before it's due, around your classes, shifts and other work. Pick one and it lands on your week as a work block.",
+    bullets: ["A Which day strip with each day's free time", "Earlier or Later, and it says what's in the way", "Linked tasks planned in order with Plan all"],
+    media: {
+      id: "A3",
+      kind: "image",
+      src: still("a3"),
+      width: 1600,
+      height: 1000,
+      alt: "kanso's week view with classes, library shifts, Google Calendar events and planned work blocks.",
+      clip: "Week view: drag a work block 30 minutes later, resize it, overlap shows the clash ring and “Move to …?”, then Move.",
+    },
+  },
+  {
+    id: "focus",
+    time: "11:15 AM",
+    label: "Focus",
+    title: "Between classes, start a focus session",
+    body: "The Focus timer runs 25, 50 or 90 minutes, or a length you pick, on a task and saves the session as a work block. The Free time widget shows how much of today is still open, with tasks that fit.",
+    bullets: ["Ctrl + Zen: kanso mode hides the dashboard and leaves your lists", "A term countdown to the last day of the semester"],
+    media: {
+      id: "A4",
+      kind: "image",
+      src: still("a4"),
+      width: 1600,
+      height: 1000,
+      alt: "kanso's home widgets: the Fall 2026 term countdown, timers, habits, the Focus timer on a task and Free time for today.",
+      clip: "Start 25 minutes on “CS 160 problem set 6”; the ring fills (time-lapsed); the block is saved; Free time drops.",
     },
   },
   {
     id: "notes",
-    label: "Notes",
-    title: "Notes that stay organized on their own",
-    body: "A rich-text editor with tables, highlights, resizable images and text alignment. Notes file themselves into tag folders, export to PDF, and track how long you’ve spent on each.",
+    time: "2:00 PM",
+    label: "Write",
+    title: "Notes that keep up with lectures",
+    body: "A rich editor with tables, highlights, checklists and a slash menu. Notes file themselves into tag folders, export to PDF, and keep track of the time you spend in each.",
+    bullets: ["Press the k for focus mode while you write", "Learning resources: one video, one article and one exercise, every link checked"],
     media: {
-      kind: "video",
-      file: "feature-notes.mp4",
-      src: "/media/feature-notes.mp4",
-      width: 1580,
-      height: 890,
-      alt: "Formatting a note in kanso and exporting it to PDF",
-      brief:
-        "Writing in the rich-text editor (table, highlight, resized image), then switching to tag folders and exporting to PDF.",
-    },
-  },
-  {
-    id: "debrief",
-    label: "Daily debrief",
-    title: "Know what to focus on next, every morning",
-    body: "See what slipped, what’s due today, whether today’s plan fits the hours you have, and a short “focus next” list. It runs on clear rules, not a chatbot, so it’s fast and predictable.",
-    media: {
+      id: "A5",
       kind: "image",
-      file: "feature-debrief.png",
-      src: "/media/feature-debrief.png",
-      width: 1775,
-      height: 584,
-      alt: "kanso’s daily debrief listing slipped, due-today and focus-next tasks",
-      brief: "The debrief panel with slipped items, today’s tasks, a capacity warning and three focus-next items.",
+      src: still("a5"),
+      width: 1600,
+      height: 1000,
+      alt: "A kanso note, “Cell respiration review”, with headings, a highlight and a list, filed under its BIO 210 tag.",
+      clip: "Open “Cell respiration review”; / → Table; highlight “net 2 ATP”; the word count ticks; press the k for focus mode.",
     },
   },
   {
-    id: "habits",
-    label: "Habits",
-    title: "Build streaks you can actually see",
-    body: "Daily check-ins, your current and best streak, and a 30-day history you can edit when life got in the way.",
+    id: "mood",
+    time: "6:00 PM",
+    label: "Call it a day",
+    title: "Check in with yourself",
+    body: "Log the day's mood in a tap, then add energy, stress and moments like Slept well or Exercised. It stays private, out of the Daily brief and away from AI.",
+    bullets: ["Weekly and monthly check-ins, if you want them", "Reminders that respect your quiet hours"],
     media: {
-      kind: "video",
-      file: "feature-habits.mp4",
-      src: "/media/feature-habits.mp4",
-      width: 1920,
-      height: 1080,
-      alt: "Checking in a habit in kanso and growing a streak",
-      brief: "Checking in a habit, the streak counter ticking up, then fixing a missed day in the 30-day history.",
+      id: "A6",
+      kind: "image",
+      src: still("a6"),
+      width: 1600,
+      height: 1000,
+      alt: "kanso's daily check-in with Good picked, energy Steady, and the moments Slept well and Exercised.",
+      clip: "Tap Good, set energy, pick Slept well and Exercised, Save, Undo toast.",
+    },
+  },
+  {
+    id: "reports",
+    time: "Sunday",
+    label: "Look back",
+    title: "See where your week went",
+    body: "Reports compare your pace with last week, show where your time went across tasks, notes, habits and events, and explain your mood patterns in plain sentences.",
+    bullets: ["Patterns like “Your energy was lower on Library job days”", "Any week, month or year"],
+    media: {
+      id: "A7",
+      kind: "image",
+      src: still("a7"),
+      width: 1600,
+      height: 1000,
+      alt: "kanso Reports, Overview for the week: stat tiles, the Pace card and where the time went.",
+      clip: "Overview Pace chips Tasks → Habits, then Mood › Patterns and its sentence card.",
     },
   },
 ];
 
-export const SECONDARY_FEATURES: Feature[] = [
+export const SCENARIOS: { q: string; a: string }[] = [
   {
-    id: "learning",
-    label: "Learning resources · AI",
-    title: "Go deeper on any note",
-    body: "From any note, get one video, one article and one exercise. An AI plans the search; real results are filtered, link-checked and ranked by code, so it never invents a link.",
-    media: {
-      kind: "image",
-      file: "feature-ai.png",
-      src: "/media/feature-ai.png",
-      width: 1568,
-      height: 892,
-      alt: "A study note in kanso with a recommended video, article and exercise",
-      brief: "A study note with the three recommended resources beside it.",
-    },
+    q: "“I have a lab report, a problem set and a shift. Where does it all fit?”",
+    a: "Add each one with a deadline and a length. kanso shows the free hours around your classes and shifts and suggests when to do each one.",
   },
   {
-    id: "calendar",
-    label: "Calendar",
-    title: "See where your day actually went",
-    body: "Open any day to compare the plan with what you actually did, broken down by tag, with a week of each beside it. Spot which parts of your life take the most time, and adjust from there.",
-    media: {
-      kind: "image",
-      file: "feature-calendar.png",
-      src: "/media/feature-calendar.png",
-      width: 932,
-      height: 785,
-      alt: "A day in kanso’s calendar comparing planned and actual hours by tag, with weekly trends",
-      brief: "A day’s summary: plan and actual donut charts by tag, with planned and actual week charts below.",
-    },
+    q: "“My syllabus lives in Canvas and my life lives in Google Calendar.”",
+    a: "Bring both in. Canvas assignments become tasks that follow their due dates, and Google events count toward your free time. Your Google Calendar is never changed.",
+  },
+  {
+    q: "“I never know if I'm actually doing better.”",
+    a: "Reports compare your pace with last week and show how your mood moves with your days and workload, in plain sentences.",
   },
 ];
 
-export const CUSTOMIZATIONS: { title: string; body: string; media: MediaSpec }[] = [
-  {
-    title: "21 accent colors",
-    body: "Pick the color of your buttons, links and highlights.",
-    media: { kind: "video", file: "accent.mp4", src: "/media/accent.mp4", width: 480, height: 300, alt: "Changing kanso’s accent color", brief: "Switching accent colors in Settings." },
-  },
-  {
-    title: "Six paper styles",
-    body: "Graph, dot grid, college rule, wide rule, isometric or blank.",
-    media: { kind: "video", file: "page-styles.mp4", src: "/media/page-styles.mp4", width: 480, height: 300, alt: "Switching kanso’s notebook paper style", brief: "Cycling through the page rulings." },
-  },
-  {
-    title: "A dashboard you arrange",
-    body: "Drag and resize the stats tiles you care about.",
-    media: { kind: "video", file: "dashboard.mp4", src: "/media/dashboard.mp4", width: 480, height: 300, alt: "Rearranging kanso’s dashboard tiles", brief: "Dragging and resizing a stats tile." },
-  },
-  {
-    title: "Focus mode and doodles",
-    body: "Hide everything but today, or sketch on a blank canvas.",
-    media: { kind: "video", file: "focus-doodle.mp4", src: "/media/focus-doodle.mp4", width: 480, height: 300, alt: "kanso’s focus mode and doodle canvas", brief: "Toggling focus mode, then a quick doodle." },
-  },
-];
-
+/** "Instead of four apps": also the comparison AI answer engines quote. */
 export const COMPARISON: { need: string; usually: string; kanso: string }[] = [
-  { need: "A to-do list", usually: "Task app", kanso: "Tasks" },
-  { need: "Notes", usually: "Notes app", kanso: "Notes" },
-  { need: "Habit streaks", usually: "Habit tracker", kanso: "Habits" },
-  { need: "“What do I do next?”", usually: "Guesswork", kanso: "Daily debrief" },
+  { need: "A to-do list", usually: "Task app", kanso: "Tasks with suggested work times" },
+  { need: "A calendar", usually: "Calendar app", kanso: "Week view with work blocks and Google events" },
+  { need: "Notes", usually: "Notes app", kanso: "Notes filed by tag, with PDF export" },
+  { need: "Habits and mood", usually: "Two trackers", kanso: "Habits, check-ins and patterns" },
+  { need: "“What do I do next?”", usually: "Guesswork", kanso: "The Daily brief" },
 ];
 
-export const STEPS: { title: string; body: string }[] = [
-  { title: "Open the demo", body: "One click opens your own sandbox, already filled with sample tasks, notes and streaks. No email needed." },
-  { title: "Add your own day", body: "Add a few tasks, a note and a habit. Tag them once and they line up everywhere." },
-  { title: "Keep it with an account", body: "Sign up with email or Google to keep your work. Each morning, start from the daily debrief." },
+export const MORE_FEATURES: { title: string; body: string }[] = [
+  { title: "Google Calendar", body: "A one-way import. Tag, drag and edit your events in kanso; Google stays as it was." },
+  { title: "Canvas", body: "Connect a calendar feed or a token. Assignments become tasks that follow Canvas." },
+  { title: "Habits", body: "Streaks, a 30-day history you can fix, and a free time suggested each day." },
+  { title: "Linked tasks", body: "Break a big project into steps that lead up to it, then plan them all at once." },
+  { title: "Work blocks", body: "Drag and resize planned work on the week view. It snaps to 15 minutes and flags clashes." },
+  { title: "Notifications", body: "Task, event and check-in reminders, with quiet hours." },
+  { title: "Make it yours", body: "21 accent colors, six paper styles, light and dark, and a dashboard you arrange." },
+  { title: "Nothing lost", body: "Archive anything. Recently deleted keeps it for 30 days." },
 ];
 
-/** Planned, not shipped. Keep these out of FEATURES, the FAQ and llms.txt until they exist in the app. */
-export const ROADMAP: { title: string; body: string }[] = [
+export const TRUST: { title: string; body: string }[] = [
   {
-    title: "Canvas integration",
-    body: "Connect your Canvas account and pull assignments and due dates straight into your tasks and calendar.",
+    title: "Rules, not a chatbot",
+    body: "Suggested times and the Daily brief come from clear rules you can follow. AI is used only when you ask for learning resources on a note.",
   },
   {
-    title: "Projects",
-    body: "Group related tasks, notes and habits in one workspace, like projects in ChatGPT. Each project is tied to a tag, so anything you tag lands there on its own.",
+    title: "Your notebook stays yours",
+    body: "Every request is scoped to your account. No ads, no tracking cookies, and your data is never sold. Delete it all from Settings.",
   },
   {
-    title: "Mood tracker",
-    body: "Log how you feel each day and see it next to your habits and streaks.",
+    title: "Built in the open",
+    body: "The app, the API and the AI service are open source, so you can check every claim on this page.",
   },
-];
-
-export const PRIVACY_POINTS = [
-  "Every request is checked and scoped to your account alone.",
-  "Demo sandboxes are private and deleted after a day.",
-  "Sign in with email and a strong password, or with Google.",
-  "Delete your account and data from Settings at any time.",
 ];
 
 export type PolicySection = { id: string; heading: string; body?: string[]; items?: string[] };
@@ -314,38 +345,38 @@ export const PRIVACY_POLICY: { updated: string; intro: string; sections: PolicyS
   ],
 };
 
-
+/** The visible FAQ and the FAQPage JSON-LD (lib/jsonld.ts) both come from this list. */
 export const FAQ: { q: string; a: string }[] = [
   {
-    q: "What is kanso?",
-    a: "kanso is a web app that combines a to-do list, a notes app and a habit tracker. It also provides a daily debrief that shows what slipped, what is due today and what to focus on next.",
-  },
-  {
     q: "Is kanso free?",
-    a: "Yes. kanso is free and open source.",
+    a: "Yes. kanso is free and open source. There are no plans to pick and no card to enter.",
   },
   {
-    q: "Can I try kanso without creating an account?",
-    a: "Yes. “Try the demo” opens a private sandbox preloaded with sample tasks, notes and habit streaks. The sandbox is not shared with anyone and is deleted after one day. You can create an account whenever you want to keep your work.",
+    q: "Can I try kanso without an account?",
+    a: "Yes. “Try the demo” opens a private sandbox with sample tasks, notes, habits and events, with no email needed. It's deleted after about a day. Canvas and Google Calendar aren't available in the demo.",
   },
   {
-    q: "How does the daily debrief decide what I should do next?",
-    a: "It uses transparent rules rather than an AI model. It reviews tasks that slipped, tasks due today, priorities and time estimates, weighs them against the hours you have available, and recommends a few tasks to focus on next.",
+    q: "Does AI plan my day?",
+    a: "No. Suggested work times, the Daily brief and the Free time widget come from clear rules about your work hours, events and deadlines. AI is used only when you ask for learning resources on a note, and mood check-ins are never sent to it.",
   },
   {
-    q: "Does the AI make up links?",
-    a: "No. The AI only decides what to search for. Every result comes from a real web search. kanso then filters the results, verifies that each link works and ranks them without AI, so you see one video, one article and one exercise.",
+    q: "Will kanso change my Google Calendar?",
+    a: "No. The Google Calendar import is one-way. Imported events show on your kanso calendar, where you can tag, edit, drag or archive them, but those changes stay in kanso. Nothing is ever written to Google.",
   },
   {
     q: "Is my data private?",
-    a: "Yes. Every request is authenticated and restricted to your own account, so other users cannot access your tasks or notes. You can delete your account and all of its data at any time from Settings.",
+    a: "Yes. Every request is checked and limited to your own account, so no one else can see your tasks, notes or check-ins. There are no ads or tracking cookies, your data is never sold, and you can delete your account and everything in it from Settings.",
   },
   {
     q: "Can I export my notes?",
-    a: "Yes. Any note can be exported to PDF with its formatting, tables and images intact.",
+    a: "Yes. Any note exports to PDF with its formatting, tables and images.",
   },
   {
     q: "Does kanso work on my phone?",
-    a: "Yes. kanso works in mobile browsers, although it is designed primarily for desktop use.",
+    a: "Yes. kanso runs in any modern mobile browser, with layouts made for small screens, and there's nothing to install. It's at its best on a laptop, where you plan the week.",
+  },
+  {
+    q: "Does kanso work with Canvas?",
+    a: "Yes. In Settings → Canvas, connect with your private calendar feed link (read-only, no school approval needed) or, if your school allows it, a personal access token. Assignments you add become tasks that follow Canvas: the due date moves when Canvas changes it, and the task completes when Canvas counts the work done.",
   },
 ];

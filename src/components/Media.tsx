@@ -1,82 +1,65 @@
 import Image from "next/image";
-import { Film, ImageIcon, PlayCircle } from "lucide-react";
 import { MediaLightbox } from "@/components/MediaLightbox";
-import type { MediaSpec } from "@/content/site";
+import { ThemedVideo } from "@/components/ThemedVideo";
+import type { MediaSpec, Themed } from "@/content/site";
 
 type Props = {
   media: MediaSpec;
+  /** Rendered width, for the srcset. */
+  sizes: string;
+  /** The window title in the browser frame. */
+  label?: string;
+  /** Hero only: preload the clip's metadata and show the phone still below 640px. */
+  hero?: boolean;
   className?: string;
-  /** Hero only: loads eagerly because it is the largest paint. */
-  priority?: boolean;
-  compact?: boolean;
-  /** Rendered width of an image, for its srcset. Defaults to the full content column. */
-  sizes?: string;
 };
 
 /**
- * Shows the real asset once `media.src` is set in content/site.ts; until then, a
- * labelled placeholder that says exactly what to record. Videos are muted,
- * looping and inline (smaller and smoother than GIFs). Real media gets an "Enlarge" overlay.
+ * Light and dark copies of a still. CSS shows the one for the current theme (the OS setting or the
+ * header toggle), and because both are lazy, the hidden one is never downloaded.
  */
-export function Media({ media, className = "", priority = false, compact = false, sizes = "(min-width: 1280px) 1200px, 100vw" }: Props) {
-  const ratio = { aspectRatio: `${media.width} / ${media.height}` };
+function ThemedImage({ src, alt, width, height, sizes, className = "" }: { src: Themed; alt: string; width: number; height: number; sizes: string; className?: string }) {
+  return (
+    <>
+      <Image src={src.light} alt={alt} width={width} height={height} sizes={sizes} quality={90} className={`h-auto w-full dark:hidden ${className}`} />
+      <Image src={src.dark} alt={alt} width={width} height={height} sizes={sizes} quality={90} className={`hidden h-auto w-full dark:block ${className}`} />
+    </>
+  );
+}
 
-  if (media.src) {
-    const asset =
-      media.kind === "image" ? (
-        <Image
-          src={media.src}
-          alt={media.alt}
-          width={media.width}
-          height={media.height}
-          priority={priority}
-          sizes={sizes}
-          // Screenshots are mostly UI text, which the default quality (75) visibly smears.
-          quality={90}
-          className="h-auto w-full rounded-lg border border-hairline"
-        />
-      ) : (
-        <video
-          className="block h-auto w-full rounded-lg border border-hairline"
-          // "auto" lets the file's real ratio win once it loads, so a spec that's slightly off never letterboxes.
-          style={{ aspectRatio: `auto ${media.width} / ${media.height}` }}
-          src={media.src}
-          poster={media.poster}
-          width={media.width}
-          height={media.height}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload={priority ? "auto" : "none"}
-          aria-label={media.alt}
-        />
-      );
-
-    return (
-      <div className={`relative rounded-lg ${className}`}>
-        {asset}
-        <MediaLightbox media={{ ...media, src: media.src }} />
-      </div>
+/**
+ * One storyboard slot (content/site.ts), in a browser frame. A still today; set `kind: "video"`
+ * with `src`, `mp4` and `poster` and the same slot plays the clip, with no layout change.
+ */
+export function Media({ media, sizes, label = "kanso", hero = false, className = "" }: Props) {
+  const asset =
+    media.kind === "video" && media.poster ? (
+      <ThemedVideo src={media.src} mp4={media.mp4} poster={media.poster} width={media.width} height={media.height} alt={media.alt} hero={hero} />
+    ) : (
+      <ThemedImage src={media.src} alt={media.alt} width={media.width} height={media.height} sizes={sizes} />
     );
-  }
-
-  const Icon = media.kind === "video" ? PlayCircle : media.kind === "gif" ? Film : ImageIcon;
-  const label = media.kind === "video" ? "Video" : media.kind === "gif" ? "Loop" : "Screenshot";
 
   return (
-    <div
-      role="img"
-      aria-label={`Placeholder: ${media.alt}`}
-      style={ratio}
-      className={`flex w-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-wire bg-surface-raised p-6 text-center text-secondary ${className}`}
-    >
-      {!compact && <Icon aria-hidden className="h-10 w-10 text-accent" strokeWidth={1.8} />}
-      <span className="rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-xs font-medium text-ink">
-        {label} · {media.file}
-        {!compact && ` · ${media.width}×${media.height}`}
-      </span>
-      {!compact && <span className="max-w-md text-[13px] leading-5">{media.brief}</span>}
-    </div>
+    <>
+      {hero && media.phone && (
+        <div className="mx-auto w-[min(280px,78vw)] rounded-[34px] bg-ink p-2.5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.5)] sm:hidden">
+          <div className="overflow-hidden rounded-[26px]">
+            <ThemedImage src={media.phone.src} alt={media.alt} width={media.phone.width} height={media.phone.height} sizes="280px" />
+          </div>
+        </div>
+      )}
+      <figure className={`frame relative ${hero && media.phone ? "hidden sm:block" : ""} ${className}`}>
+        <div aria-hidden className="flex h-[30px] items-center gap-1.5 border-b border-hairline bg-surface-raised px-3">
+          <i className="block size-[9px] rounded-full bg-wire" />
+          <i className="block size-[9px] rounded-full bg-wire" />
+          <i className="block size-[9px] rounded-full bg-wire" />
+          <b className="ml-2.5 truncate text-[11px] leading-none font-medium text-muted">{label}</b>
+        </div>
+        <div className="relative">
+          {asset}
+          {media.kind === "image" && <MediaLightbox media={media} />}
+        </div>
+      </figure>
+    </>
   );
 }
